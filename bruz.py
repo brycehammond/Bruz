@@ -19,10 +19,46 @@ def hello():
 @ask.intent("FoodTruckIntent", convert={'date': 'date'}, default={'date': date.today()})
 def food_truck(date):
 
-    truck_msg = "The food truck is Mile High Burgers on {0:%B} {0:%d}".format(date)
+    request = requests.get("http://bruz.improbabilitydrive.com/foodtrucks.json")
+    trucks_json = request.json()
+    search_date = date.strftime("%Y-%m-%d")
 
-    return statement(truck_msg)
+    if request.status_code == 200:
+        truck_json = filter(lambda x: x['date'] == search_date, trucks_json)
+        if len(truck_json) > 0:
+            truck_json = truck_json[0] #set to first element
+            if date == date.today():
+                when_there = "today"
+            else:
+                when_there = "on {0:%A} {0:%B} {0.day}{1}".format(date, _day_suffix(date.day))
 
+            speech = "{0} is at Bruz from {1} to {2} {3}".format(truck_json['name'], truck_json['start_time'], truck_json['end_time'], when_there)
+        else:
+            speech = "We couldn't find out what food truck is at Bruz on {0:%B} {0:%d}".format(date)
+
+    else:
+        speech = "There was a problem finding the food trucks for Bruz Beers"
+
+    return statement(speech)
+
+@ask.intent('AMAZON.HelpIntent')
+def help():
+    help_text = render_template('help')
+
+
+@ask.intent('AMAZON.StopIntent')
+def stop():
+    bye_text = "Goodbye"
+    return statement(bye_text)
+
+
+@ask.intent('AMAZON.CancelIntent')
+def cancel():
+    bye_text = "Goodbye"
+    return statement(bye_text)
+
+def _day_suffix(day):
+    return 'th' if 11 <= day <= 13 else {1:'st',2:'nd',3:'rd'}.get(day % 10, 'th')
 
 if __name__ == '__main__':
 
