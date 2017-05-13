@@ -1,4 +1,6 @@
 import requests
+import time
+from datetime import date
 from flask import Flask
 from flask_ask import Ask, statement, question, session
 
@@ -15,9 +17,9 @@ def hello():
 
 
 @ask.intent("FoodTruckIntent", convert={'date': 'date'}, default={'date': date.today()})
-def food_truck():
+def food_truck(date):
 
-    truck_msg = "The food truck is Mile High Burgers"
+    truck_msg = "The food truck is Mile High Burgers on {0:%B} {0:%d}".format(date)
 
     return statement(truck_msg)
 
