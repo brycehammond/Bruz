@@ -43,7 +43,7 @@ def food_truck(date):
 
 @ask.intent('AMAZON.HelpIntent')
 def help():
-    help_text = render_template('help')
+    return statement("You can ask Bruz what food truck is there today or on a given date")
 
 
 @ask.intent('AMAZON.StopIntent')
