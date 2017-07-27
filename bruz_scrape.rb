@@ -15,6 +15,6 @@ doc.css("[class='entry-title-wrapper']").each do |truck|
   trucks << truck_info
 end
 
-output = File.open(__dir__ + "/public/foodtruck.json", "w")
+output = File.open(__dir__ + "/public/foodtrucks.json", "w")
 output.puts trucks.to_json
 output.close
