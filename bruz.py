@@ -11,7 +11,7 @@ ask = Ask(app, "/")
 @ask.launch
 def hello():
 
-    welcome_msg = "Welcome to Bruz Beers."
+    welcome_msg = "Welcome to Bruz Beers. You can ask Bruz what food truck is there today or on a given date."
 
     return question(welcome_msg)
 
@@ -43,7 +43,7 @@ def food_truck(date):
 
 @ask.intent('AMAZON.HelpIntent')
 def help():
-    return statement("You can ask Bruz what food truck is there today or on a given date")
+    return statement("You can ask Bruz what food truck is there today or on a given date.")
 
 
 @ask.intent('AMAZON.StopIntent')
