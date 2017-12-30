@@ -11,7 +11,7 @@ ask = Ask(app, "/")
 @ask.launch
 def hello():
 
-    welcome_msg = "Welcome to Bruz Beers. You can ask Bruz what food truck is there today or on a given date."
+    welcome_msg = "Welcome to Bruz Beers. Would you like to know what food truck is there today?"
 
     return question(welcome_msg)
 
@@ -34,12 +34,21 @@ def food_truck(date):
 
             speech = "{0} is at Bruz from {1} to {2} {3}".format(truck_json['name'], truck_json['start_time'], truck_json['end_time'], when_there)
         else:
-            speech = "We couldn't find out what food truck is at Bruz on {0:%B} {0:%d}".format(date)
+            speech = "So sorry, There is no food truck at Bruz on {0:%B} {0:%d}".format(date)
 
     else:
         speech = "There was a problem finding the food trucks for Bruz Beers"
 
     return statement(speech)
+
+@ask.intent("YesIntent")
+def today_foodtruck():
+    return food_truck(date.today())
+
+@ask.intent("NoIntent")
+def no_intent():
+    bye_text = 'I am not sure why you asked me to run then, but okay... goodbye'
+    return statement(bye_text)
 
 @ask.intent('AMAZON.HelpIntent')
 def help():
