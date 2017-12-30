@@ -11,7 +11,7 @@ ask = Ask(app, "/")
 @ask.launch
 def hello():
 
-    welcome_msg = "Welcome to Bruz Beers. Would you like to know what food truck is there today?"
+    welcome_msg = "Welcome to Bruz Beers. You can ask Bruz what food truck is there today or on a given date. Would you like to know what food truck is there today?"
 
     return question(welcome_msg)
 
