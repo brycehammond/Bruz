@@ -13,7 +13,7 @@ def hello():
 
     welcome_msg = "Welcome to Bruz Beers."
 
-    return statement(welcome_msg)
+    return question(welcome_msg)
 
 
 @ask.intent("FoodTruckIntent", convert={'date': 'date'}, default={'date': date.today()})
