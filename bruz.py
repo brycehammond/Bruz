@@ -47,7 +47,7 @@ def today_foodtruck():
 
 @ask.intent("NoIntent")
 def no_intent():
-    bye_text = 'I am not sure why you asked me to run then, but okay... goodbye'
+    bye_text = 'okay... goodbye'
     return statement(bye_text)
 
 @ask.intent('AMAZON.HelpIntent')
