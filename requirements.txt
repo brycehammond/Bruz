@@ -1,3 +1,4 @@
+cryptography<2.2
 Flask
 Flask-Ask
 zappa
