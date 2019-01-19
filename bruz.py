@@ -52,7 +52,7 @@ def no_intent():
 
 @ask.intent('AMAZON.HelpIntent')
 def help():
-    return statement("You can ask Bruz what food truck is there today or on a given date. Would you like to know what food truck is there today?")
+    return question("You can ask Bruz what food truck is there today or on a given date. Would you like to know what food truck is there today?")
 
 
 @ask.intent('AMAZON.StopIntent')
