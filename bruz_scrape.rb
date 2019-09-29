@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'json'
 require 'date'
 
-doc = Nokogiri::HTML(open("https://bruz-beers.squarespace.com/eats/"))
+doc = Nokogiri::HTML(open("https://bruz-beers.squarespace.com/eats/?view=list"))
 
 trucks = []
 
