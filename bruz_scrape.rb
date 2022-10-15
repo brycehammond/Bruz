@@ -3,15 +3,15 @@ require 'nokogiri'
 require 'json'
 require 'date'
 
-doc = Nokogiri::HTML(open("https://bruz-beers.squarespace.com/eats/?view=list"))
+doc = Nokogiri::HTML(URI.open("https://wheresthefoodtruck.com/locations/196/"))
 
 trucks = []
 
-doc.css("[class='entry-title-wrapper']").each do |truck|
+doc.css("[class='card rounded-2 overflow-hidden mb-3 shadow-sm']").each do |truck|
   truck_info = {}
+  truck_info[:date] =  Date.parse(truck.at_css("[class='text-primary mb-0 px-3 text-center d-flex justify-content-center align-items-center h-100']").content).to_s
   truck_info[:name] = truck.at_css("a").content
-  truck_info[:date] =  Date.parse(truck.at_css("[class='event-meta-heading eventlist-meta-date']").content).to_s
-  truck_info[:start_time], truck_info[:end_time] = truck.at_css("[class='event-time-12hr']").content.strip.split(/\s*+–\s+/)
+  truck_info[:start_time], truck_info[:end_time] = truck.at_css("[class='col-md-3 mb-2 mb-lg-0']").content.split(' - ').map(&:strip)
   trucks << truck_info
 end
 
